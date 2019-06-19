@@ -14,6 +14,8 @@ public class arithmetic implements Serializable {
         this.score = score;
     }
 
+
+
     public String getOperation(){
         return operation;
     }
