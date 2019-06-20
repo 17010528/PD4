@@ -50,7 +50,7 @@ public class showResult extends AppCompatActivity {
         lv.setAdapter(aa);
 
         Intent intent = getIntent();
-        String target = intent.getStringExtra("data");
+        final String target = intent.getStringExtra("data");
         tvOperation.setText(target);
 
         if(target.equals("+")){
@@ -71,6 +71,16 @@ public class showResult extends AppCompatActivity {
 
         }
 
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent intent = new Intent(showResult.this, test.class);
+                intent.putExtra("data", target);
+                startActivity(intent);
+            }
+        });
 
     }
 }
