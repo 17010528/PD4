@@ -20,14 +20,13 @@ public class test extends AppCompatActivity {
     TextView tv1stNumber , tv2ndNumber , tvOperationTest, tvWarning ;
     Button btnAnswer1 , btnAnswer2 , btnAnswer3, btnAnswer4 ;
     int correctTotal = 0;
-    int score = 0;
+
     boolean running;
 
     ArrayList<results> results;
     ArrayList<arithmetic> arithmetics;
 
-    int dbTime = 0;
-    int dbScore = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,6 @@ public class test extends AppCompatActivity {
 
         tvOperationTest = findViewById(R.id.tvOperationTest);
         final View someView = findViewById(R.id.mainView);
-
 
 
         btnAnswer1 = findViewById(R.id.btnAnswer1);
@@ -68,8 +66,8 @@ public class test extends AppCompatActivity {
         final DBHelper dbh = new DBHelper(test.this);
         arithmetics = dbh.getAllOperations();
         final String target = arithmetics.get(id).getOperation();
-         dbTime = arithmetics.get(id).getDuration();
-         dbScore = arithmetics.get(id).getScore();
+
+
 
 
         tvOperationTest.setText(target);
@@ -150,6 +148,7 @@ public class test extends AppCompatActivity {
             btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
             btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
         }else{
+
             tvWarning.setVisibility(View.VISIBLE);
             correctTotal = number.get(0) / division.get(1);
             totalBtn.add(number.get(0) / division.get(0));
@@ -177,10 +176,14 @@ public class test extends AppCompatActivity {
             public void onClick(View view) {
 
                 int test1 = Integer.parseInt(btnAnswer1.getText().toString());
+
+                int score = arithmetics.get(id).getScore();
+                int duration = arithmetics.get(id).getDuration();
+
                 if(test1 == correctTotal){
 
                     someView.setBackgroundColor(Color.GREEN);
-                    score += 1;
+                    score = score + 1;
 
                 }else{
 
@@ -208,12 +211,12 @@ public class test extends AppCompatActivity {
                 }
 
 
-                dbScore = dbScore + score;
-                dbTime = dbTime + second ;
 
-                Toast.makeText(test.this, "Duration :" + dbTime +" Seconds\nPoints : "+dbScore,
+                duration = duration + second ;
+
+                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+ score ,
                         Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , dbTime , dbScore);
+                dbh.updateGame(id , target , duration , score);
                 dbh.close();
                 finish();
                 startActivity(getIntent());
@@ -224,6 +227,9 @@ public class test extends AppCompatActivity {
         btnAnswer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                int score = arithmetics.get(id).getScore();
+                int duration = arithmetics.get(id).getDuration();
 
                 int test1 = Integer.parseInt(btnAnswer2.getText().toString());
                 if(test1 == correctTotal){
@@ -255,12 +261,12 @@ public class test extends AppCompatActivity {
                 }
 
 
-                dbScore = dbScore + score;
-                dbTime = dbTime + second ;
 
-                Toast.makeText(test.this, "Duration :" + dbTime +" Seconds\nPoints : "+dbScore,
+                duration = duration + second ;
+
+                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+score,
                         Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , dbTime , dbScore);
+                dbh.updateGame(id , target , duration , score);
                 dbh.close();
                 finish();
                 startActivity(getIntent());
@@ -270,6 +276,9 @@ public class test extends AppCompatActivity {
         btnAnswer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                int score = arithmetics.get(id).getScore();
+                int duration = arithmetics.get(id).getDuration();
 
                 int test1 = Integer.parseInt(btnAnswer3.getText().toString());
                 if(test1 == correctTotal){
@@ -300,13 +309,11 @@ public class test extends AppCompatActivity {
                     second = minute * 60 + second;
                 }
 
+                duration  = duration + second ;
 
-                dbScore = dbScore + score;
-                dbTime = dbTime + second ;
-
-                Toast.makeText(test.this, "Duration :" + dbTime +" Seconds\nPoints : "+dbScore,
+                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+ score,
                         Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , dbTime , dbScore);
+                dbh.updateGame(id , target , duration , score);
                 dbh.close();
                 finish();
                 startActivity(getIntent());
@@ -315,6 +322,9 @@ public class test extends AppCompatActivity {
         btnAnswer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                int score = arithmetics.get(id).getScore();
+                int duration = arithmetics.get(id).getDuration();
 
                 int test1 = Integer.parseInt(btnAnswer4.getText().toString());
                 if(test1 == correctTotal){
@@ -346,12 +356,12 @@ public class test extends AppCompatActivity {
                 }
 
 
-                dbScore = dbScore + score;
-                dbTime = dbTime + second ;
 
-                Toast.makeText(test.this, "Duration :" + dbTime +" Seconds\nPoints : "+dbScore,
+                duration = duration + second ;
+
+                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+score,
                         Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , dbTime , dbScore);
+                dbh.updateGame(id , target , duration , score);
                 dbh.close();
                 finish();
                 startActivity(getIntent());

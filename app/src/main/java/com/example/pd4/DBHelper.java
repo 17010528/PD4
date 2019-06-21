@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "PD4.db";
-    private static final int DATABASE_VER = 11;
+    private static final int DATABASE_VER = 12;
     private static final String TABLE_GAME = "PD4";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_OPERATION = "operation";
