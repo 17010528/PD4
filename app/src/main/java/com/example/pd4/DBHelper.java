@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "PD4.db";
-    private static final int DATABASE_VER = 12;
+    private static final int DATABASE_VER = 17;
     private static final String TABLE_GAME = "PD4";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_OPERATION = "operation";
@@ -39,13 +39,6 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_OPERATION, "+");
         values.put(COLUMN_DURATION,3);
         values.put(COLUMN_SCORE, 2);
-
-        db.insert(TABLE_GAME , null , values);
-
-        values.put(COLUMN_ID , 5);
-        values.put(COLUMN_OPERATION, "+");
-        values.put(COLUMN_DURATION,2);
-        values.put(COLUMN_SCORE, 3);
 
         db.insert(TABLE_GAME , null , values);
 
@@ -97,6 +90,22 @@ public class DBHelper extends SQLiteOpenHelper {
         // Close the database connection
         db.close();
     }
+
+    public void deleteGame(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String msg = "";
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(id)};
+        int result = db.delete(TABLE_GAME, condition, args);
+        if(result==-1){
+            Log.e("unsuccessful" , "fail");
+        }else{
+            Log.e("successful" , "delete successful");
+        }
+
+    }
+
     public void updateGame(int id , String operation, int duration , int score ){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

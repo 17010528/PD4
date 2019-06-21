@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 
 
@@ -99,7 +99,7 @@ public class showResult extends AppCompatActivity {
         }else{
 
             tvOperationName.setText("Divide");
-            root.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+            root.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
 
 
         }
@@ -150,7 +150,9 @@ public class showResult extends AppCompatActivity {
                 int score = arithmetics.get(i).getScore();
                 String operation = arithmetics.get(i).getOperation();
                 int id = arithmetics.get(i).getId();
-
+                if(score == 0 && duration == 0){
+                    db.deleteGame(id);
+                }
                 results.add(new results(id, operation , duration, score));
                 aa = new resultsAdapter(this, R.layout.row_results, results);
                 lv.setAdapter(aa);

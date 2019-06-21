@@ -20,7 +20,8 @@ public class test extends AppCompatActivity {
     TextView tv1stNumber , tv2ndNumber , tvOperationTest, tvWarning ;
     Button btnAnswer1 , btnAnswer2 , btnAnswer3, btnAnswer4 ;
     int correctTotal = 0;
-
+    int score;
+    int duration;
     boolean running;
 
     ArrayList<results> results;
@@ -147,6 +148,7 @@ public class test extends AppCompatActivity {
             btnAnswer2.setText(Integer.toString(totalBtn.get(1)));
             btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
             btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
+
         }else{
 
             tvWarning.setVisibility(View.VISIBLE);
@@ -176,9 +178,8 @@ public class test extends AppCompatActivity {
             public void onClick(View view) {
 
                 int test1 = Integer.parseInt(btnAnswer1.getText().toString());
-
-                int score = arithmetics.get(id).getScore();
-                int duration = arithmetics.get(id).getDuration();
+                score = arithmetics.get(id).getScore();
+                duration = arithmetics.get(id).getDuration();
 
                 if(test1 == correctTotal){
 
@@ -228,8 +229,8 @@ public class test extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int score = arithmetics.get(id).getScore();
-                int duration = arithmetics.get(id).getDuration();
+                score = arithmetics.get(id).getScore();
+                duration = arithmetics.get(id).getDuration();
 
                 int test1 = Integer.parseInt(btnAnswer2.getText().toString());
                 if(test1 == correctTotal){
@@ -277,8 +278,8 @@ public class test extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int score = arithmetics.get(id).getScore();
-                int duration = arithmetics.get(id).getDuration();
+                score = arithmetics.get(id).getScore();
+                duration = arithmetics.get(id).getDuration();
 
                 int test1 = Integer.parseInt(btnAnswer3.getText().toString());
                 if(test1 == correctTotal){
@@ -323,8 +324,8 @@ public class test extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int score = arithmetics.get(id).getScore();
-                int duration = arithmetics.get(id).getDuration();
+                score = arithmetics.get(id).getScore();
+                duration = arithmetics.get(id).getDuration();
 
                 int test1 = Integer.parseInt(btnAnswer4.getText().toString());
                 if(test1 == correctTotal){
