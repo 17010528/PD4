@@ -106,6 +106,15 @@ public class test extends AppCompatActivity {
             totalBtn.add(number.get(4) + number.get(5));
             totalBtn.add(number.get(6) + number.get(7));
 
+            Collections.shuffle(totalBtn);
+
+            tv1stNumber.setText(Integer.toString(number.get(0)));
+            tv2ndNumber.setText(Integer.toString(number.get(1)));
+
+            btnAnswer1.setText(Integer.toString(totalBtn.get(0)));
+            btnAnswer2.setText(Integer.toString(totalBtn.get(1)));
+            btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
+            btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
 
         }else if(target.equals("-")){
 
@@ -115,6 +124,15 @@ public class test extends AppCompatActivity {
             totalBtn.add(number.get(4) - number.get(5));
             totalBtn.add(number.get(6) - number.get(7));
 
+            Collections.shuffle(totalBtn);
+
+            tv1stNumber.setText(Integer.toString(number.get(0)));
+            tv2ndNumber.setText(Integer.toString(number.get(1)));
+
+            btnAnswer1.setText(Integer.toString(totalBtn.get(0)));
+            btnAnswer2.setText(Integer.toString(totalBtn.get(1)));
+            btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
+            btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
         }else if(target.equals("×")){
 
             correctTotal = number.get(0) * number.get(1);
@@ -122,6 +140,15 @@ public class test extends AppCompatActivity {
             totalBtn.add(number.get(2) * number.get(3));
             totalBtn.add(number.get(4) * number.get(5));
             totalBtn.add(number.get(6) * number.get(7));
+            Collections.shuffle(totalBtn);
+
+            tv1stNumber.setText(Integer.toString(number.get(0)));
+            tv2ndNumber.setText(Integer.toString(number.get(1)));
+
+            btnAnswer1.setText(Integer.toString(totalBtn.get(0)));
+            btnAnswer2.setText(Integer.toString(totalBtn.get(1)));
+            btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
+            btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
         }else{
             tvWarning.setVisibility(View.VISIBLE);
             correctTotal = number.get(0) / division.get(1);
@@ -129,18 +156,19 @@ public class test extends AppCompatActivity {
             totalBtn.add(number.get(0) / division.get(1));
             totalBtn.add(number.get(0) / division.get(2));
             totalBtn.add(number.get(0) / division.get(3));
+            Collections.shuffle(totalBtn);
+
+            tv1stNumber.setText(Integer.toString(number.get(0)));
+            tv2ndNumber.setText(Integer.toString(division.get(1)));
+
+            btnAnswer1.setText(Integer.toString(totalBtn.get(0)));
+            btnAnswer2.setText(Integer.toString(totalBtn.get(1)));
+            btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
+            btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
 
         }
 
-        Collections.shuffle(totalBtn);
 
-        tv1stNumber.setText(Integer.toString(number.get(0)));
-        tv2ndNumber.setText(Integer.toString(division.get(1)));
-
-        btnAnswer1.setText(Integer.toString(totalBtn.get(0)));
-        btnAnswer2.setText(Integer.toString(totalBtn.get(1)));
-        btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
-        btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
 
 
 

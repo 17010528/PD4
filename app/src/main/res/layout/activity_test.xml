@@ -15,6 +15,15 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="match_parent"
+            android:paddingTop="20dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,8 +130,5 @@
                 android:text="Button" />
         </LinearLayout>
     </LinearLayout>
-    <Chronometer
-        android:id = "@+id/chronometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 </LinearLayout>
