@@ -11,15 +11,16 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private final static int REQUEST_CODE_1 = 1;
     ListView lv;
     ArrayAdapter aa;
-    String[] operation = {"+" , "-" , "×" , "÷"};
+    String[] operation = {"+", "-", "×", "÷"};
     ArrayList<arithmetic> arithmetics;
     ArrayList<results> results;
 
     int highestAdd = 0;
     int addId = 0;
-    int addDuration = 0;
+    int shortestDuration = 60;
 
     int highestMinus = 0;
     int minusId = 0;
@@ -43,49 +44,53 @@ public class MainActivity extends AppCompatActivity {
 
         lv = this.findViewById(R.id.lv);
 
-        arithmetics = db.getAllOperations();
+        arithmetics = db.getOperation();
 
 
-        for(int i = 0 ; arithmetics.size() > i ; i++){
+        for (int i = 0; arithmetics.size() > i; i++) {
 
             int score = arithmetics.get(i).getScore();
             int id = arithmetics.get(i).getId();
             int duration = arithmetics.get(i).getDuration();
-
             String operations = arithmetics.get(i).getOperation();
 
-            if(operations.equals("+") && score>highestAdd){
+            if (operations.equals("+")) {
+                if (duration < shortestDuration) {
+                    highestAdd = score;
+                    addId = id;
+                    shortestDuration = duration;
+                }
+            } else if (operations.equals("-")) {
 
-                highestAdd = score;
-                addId = id;
-                addDuration = duration;
+                if (duration < shortestDuration) {
+                    highestAdd = score;
+                    addId = id;
+                    shortestDuration = duration;
+                }
+            } else if (operations.equals("÷")) {
 
-            } else if (operations.equals("-") && score>highestMinus) {
+                if (duration < shortestDuration) {
+                    highestAdd = score;
+                    addId = id;
+                    shortestDuration = duration;
+                }
+            } else if (operations.equals("÷")){
 
-                highestMinus = score;
-                minusId = id;
-                minusDuration = duration;
+                if (duration < shortestDuration) {
+                    highestAdd = score;
+                    addId = id;
+                    shortestDuration = duration;
+                }
 
-            } else if (operations.equals("÷") && score>highestDivide){
-
-                highestDivide = score;
-                divideId = id;
-                divideDuration = duration;
-
-            }else{
-
-                highestMultiply = score;
-                multiplyId = id;
-                multiplyDuration = duration;
 
             }
         }
         arithmetics = new ArrayList<>();
 
-        arithmetics.add(new arithmetic(addId , "+" , addDuration , highestAdd));
-        arithmetics.add(new arithmetic(minusId , "-" , minusDuration , highestMinus));
-        arithmetics.add(new arithmetic(multiplyId , "×" , multiplyDuration , highestMultiply));
-        arithmetics.add(new arithmetic(divideId , "÷" , divideDuration , highestDivide));
+        arithmetics.add(new arithmetic(addId, "+", shortestDuration, highestAdd));
+        arithmetics.add(new arithmetic(minusId, "-", minusDuration, highestMinus));
+        arithmetics.add(new arithmetic(multiplyId, "×", multiplyDuration, highestMultiply));
+        arithmetics.add(new arithmetic(divideId, "÷", divideDuration, highestDivide));
 
         aa = new arithmeticAdapter(this, R.layout.row, arithmetics);
         lv.setAdapter(aa);
@@ -96,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-
                 Intent i = new Intent(MainActivity.this,
                         showResult.class);
 
                 String target = operation[position];
                 i.putExtra("data", target);
-                startActivity(i);
+                startActivityForResult(i, REQUEST_CODE_1);
             }
         });
     }
 }
+

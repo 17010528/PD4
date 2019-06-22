@@ -15,6 +15,7 @@
         android:paddingTop="20dp"
         android:text="TextView"
         android:textColor="@android:color/white"
+        android:textSize="20dp"
         android:textAlignment="center" />
 
     <TextView
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:text="TextView"
+        android:textSize="20dp"
         android:textColor="@android:color/white"
         android:textAlignment="center" />
 
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textSize="20dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:textColor="@android:color/white"
@@ -39,6 +42,17 @@
     <ListView
         android:id="@+id/lv1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:text="Not Set" />
 
 </LinearLayout>

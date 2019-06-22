@@ -47,9 +47,13 @@ public class arithmeticAdapter extends ArrayAdapter {
         arithmetic currentPark = arithmetics.get(position);
         // Set the TextView to show the food
         tvOpeartion.setText(currentPark.getOperation());
-        tvDuration.setText("Duration : "+currentPark.getDuration() + " seconds");
-        tvScore.setText("High-score : " +currentPark.getScore() + "/5");
-
+        if(currentPark.getScore() == 0 && currentPark.getDuration() == 0){
+            tvDuration.setText("Duration : Not Set ");
+            tvScore.setText("Score : Not Set ");
+        }else {
+            tvDuration.setText("Duration : " + currentPark.getDuration() + " seconds");
+            tvScore.setText("High-score : " + currentPark.getScore());
+        }
         // Set the image to star or nostar accordingly
 
         // Return the nicely done up View to the ListView

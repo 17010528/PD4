@@ -1,8 +1,9 @@
 package com.example.pd4;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +24,7 @@ public class test extends AppCompatActivity {
     int score;
     int duration;
     boolean running;
-
+    String correct = "incorrect";
     ArrayList<results> results;
     ArrayList<arithmetic> arithmetics;
 
@@ -65,7 +66,7 @@ public class test extends AppCompatActivity {
 
 
         final DBHelper dbh = new DBHelper(test.this);
-        arithmetics = dbh.getAllOperations();
+        arithmetics = dbh.getOperation();
         final String target = arithmetics.get(id).getOperation();
 
 
@@ -132,6 +133,7 @@ public class test extends AppCompatActivity {
             btnAnswer2.setText(Integer.toString(totalBtn.get(1)));
             btnAnswer3.setText(Integer.toString(totalBtn.get(2)));
             btnAnswer4.setText(Integer.toString(totalBtn.get(3)));
+
         }else if(target.equals("×")){
 
             correctTotal = number.get(0) * number.get(1);
@@ -169,7 +171,7 @@ public class test extends AppCompatActivity {
 
         }
 
-
+        final AlertDialog.Builder myBuilder = new AlertDialog.Builder(test.this);
 
 
 
@@ -185,6 +187,7 @@ public class test extends AppCompatActivity {
 
                     someView.setBackgroundColor(Color.GREEN);
                     score = score + 1;
+                    correct = "correct";
 
                 }else{
 
@@ -215,12 +218,31 @@ public class test extends AppCompatActivity {
 
                 duration = duration + second ;
 
-                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+ score ,
-                        Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , duration , score);
-                dbh.close();
-                finish();
-                startActivity(getIntent());
+                String msg = "Your answer is " + correct + "!\nYou took : " + duration + "seconds";
+                myBuilder.setMessage(msg);
+                myBuilder.setCancelable(false);
+                myBuilder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dbh.updateGame(id , target , duration , score);
+                        dbh.close();
+                        Intent intent = new Intent(test.this, showResult.class);
+                        intent.putExtra("data", target);
+                        startActivity(intent);
+                    }
+                });
+
+                myBuilder.setNegativeButton("Retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();  // restarting the activity.
+                        startActivity(getIntent());
+                    }
+                });
+
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
+
 
             }
         });
@@ -234,8 +256,11 @@ public class test extends AppCompatActivity {
 
                 int test1 = Integer.parseInt(btnAnswer2.getText().toString());
                 if(test1 == correctTotal){
+
                     someView.setBackgroundColor(Color.GREEN);
                     score += 1;
+                    correct = "correct";
+
                 }else{
                     someView.setBackgroundColor(Color.RED);
 
@@ -265,12 +290,30 @@ public class test extends AppCompatActivity {
 
                 duration = duration + second ;
 
-                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+score,
-                        Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , duration , score);
-                dbh.close();
-                finish();
-                startActivity(getIntent());
+                String msg = "Your answer is " + correct + "!\nYou took : " + duration + "seconds";
+                myBuilder.setMessage(msg);
+                myBuilder.setCancelable(false);
+                myBuilder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dbh.updateGame(id , target , duration , score);
+                        dbh.close();
+                        Intent intent = new Intent(test.this, showResult.class);
+                        intent.putExtra("data", target);
+                        startActivity(intent);
+                    }
+                });
+
+                myBuilder.setNegativeButton("Retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();  // restarting the activity.
+                        startActivity(getIntent());
+                    }
+                });
+
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
 
             }
         });
@@ -283,8 +326,11 @@ public class test extends AppCompatActivity {
 
                 int test1 = Integer.parseInt(btnAnswer3.getText().toString());
                 if(test1 == correctTotal){
+
                     someView.setBackgroundColor(Color.GREEN);
                     score += 1;
+                    correct = "correct";
+
                 }else{
                     someView.setBackgroundColor(Color.RED);
 
@@ -312,12 +358,31 @@ public class test extends AppCompatActivity {
 
                 duration  = duration + second ;
 
-                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+ score,
-                        Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , duration , score);
-                dbh.close();
-                finish();
-                startActivity(getIntent());
+                String msg = "Your answer is " + correct + "!\nYou took : " + duration + "seconds";
+                myBuilder.setMessage(msg);
+                myBuilder.setCancelable(false);
+                myBuilder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dbh.updateGame(id , target , duration , score);
+                        dbh.close();
+                        Intent intent = new Intent(test.this, showResult.class);
+                        intent.putExtra("data", target);
+                        startActivity(intent);
+                    }
+                });
+
+                myBuilder.setNegativeButton("Retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();  // restarting the activity.
+                        startActivity(getIntent());
+                    }
+                });
+
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
+
             }
         });
         btnAnswer4.setOnClickListener(new View.OnClickListener() {
@@ -329,8 +394,11 @@ public class test extends AppCompatActivity {
 
                 int test1 = Integer.parseInt(btnAnswer4.getText().toString());
                 if(test1 == correctTotal){
+
                     someView.setBackgroundColor(Color.GREEN);
                     score += 1;
+                    correct = "correct";
+
                 }else{
                     someView.setBackgroundColor(Color.RED);
 
@@ -360,12 +428,32 @@ public class test extends AppCompatActivity {
 
                 duration = duration + second ;
 
-                Toast.makeText(test.this, "Duration :" + duration +" Seconds\nPoints : "+score,
-                        Toast.LENGTH_SHORT).show();
-                dbh.updateGame(id , target , duration , score);
-                dbh.close();
-                finish();
-                startActivity(getIntent());
+                String msg = "Your answer is " + correct + "!\nYou took : " + duration + "seconds\nScore: "+ score;
+                myBuilder.setMessage(msg);
+                myBuilder.setCancelable(false);
+                myBuilder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dbh.updateGame(id , target , duration , score);
+                        dbh.close();
+                        Intent intent = new Intent(test.this, showResult.class);
+                        intent.putExtra("data", target);
+                        startActivity(intent);
+                    }
+                });
+
+                myBuilder.setNegativeButton("Retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();  // restarting the activity.
+                        startActivity(getIntent());
+                    }
+                });
+
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
+
+
 
             }
         });

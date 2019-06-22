@@ -47,7 +47,7 @@ public class resultsAdapter extends ArrayAdapter {
         // Set the TextView to show the food
 
         tvDuration.setText("Duration : "+currentPark.getDuration() + " seconds");
-        tvScore.setText("High-score : " +currentPark.getScore() + "/5");
+        tvScore.setText("High-score : " +currentPark.getScore());
         // Set the image to star or nostar accordingly
 
         // Return the nicely done up View to the ListView

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "PD4.db";
-    private static final int DATABASE_VER = 17;
+    private static final int DATABASE_VER = 29;
     private static final String TABLE_GAME = "PD4";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_OPERATION = "operation";
@@ -32,33 +32,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_SCORE + " INTEGER)";
         db.execSQL(createTableSql);
         Log.i("info" ,"created tables");
-
-        ContentValues values = new ContentValues();
-
-        values.put(COLUMN_ID , 1);
-        values.put(COLUMN_OPERATION, "+");
-        values.put(COLUMN_DURATION,3);
-        values.put(COLUMN_SCORE, 2);
-
-        db.insert(TABLE_GAME , null , values);
-
-        values.put(COLUMN_ID , 2);
-        values.put(COLUMN_OPERATION, "-");
-        values.put(COLUMN_DURATION,5);
-        values.put(COLUMN_SCORE, 4);
-        db.insert(TABLE_GAME , null , values);
-
-        values.put(COLUMN_ID , 3);
-        values.put(COLUMN_OPERATION, "×");
-        values.put(COLUMN_DURATION,7);
-        values.put(COLUMN_SCORE, 6);
-        db.insert(TABLE_GAME , null , values);
-
-        values.put(COLUMN_ID , 4);
-        values.put(COLUMN_OPERATION, "÷");
-        values.put(COLUMN_DURATION,9);
-        values.put(COLUMN_SCORE, 8);
-        db.insert(TABLE_GAME , null , values);
 
     }
 
@@ -145,12 +118,17 @@ public class DBHelper extends SQLiteOpenHelper {
 //    }
 
 
-    public ArrayList<arithmetic> getAllOperations(){
+    public ArrayList<arithmetic> getOperation(){
         ArrayList<arithmetic> arithmetics = new ArrayList<arithmetic>();
+        String selectQuery = "SELECT " + COLUMN_ID + ", "
+                                +COLUMN_OPERATION + ", "
+                                +COLUMN_DURATION +", "
+                                +COLUMN_SCORE
+                                +" FROM " + TABLE_GAME
+                                +" WHERE " + COLUMN_DURATION + " >0"
+                                +" ORDER BY " + COLUMN_DURATION + " ASC";
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COLUMN_ID , COLUMN_OPERATION  , COLUMN_DURATION, COLUMN_SCORE};
-        Cursor cursor = db.query(TABLE_GAME , columns , null , null ,null , null, null, null);
-
+        Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
@@ -165,6 +143,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return arithmetics;
     }
+
+
 
 
 }
