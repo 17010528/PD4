@@ -62,11 +62,11 @@ public class test extends AppCompatActivity {
         final Intent intent = getIntent();
         String[] target1 = intent.getStringArrayExtra("data");
 
-        final int id = Integer.parseInt(target1[0]);
+        final int id = Integer.parseInt(target1[0])-1;
 
 
         final DBHelper dbh = new DBHelper(test.this);
-        arithmetics = dbh.getOperation();
+        arithmetics = dbh.getTestOperation();
         final String target = arithmetics.get(id).getOperation();
 
 

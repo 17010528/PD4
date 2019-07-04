@@ -112,8 +112,8 @@ public class showResult extends AppCompatActivity {
             public void onClick(View view) {
 
                 DBHelper dbh = new DBHelper(showResult.this);
-                arithmetics = dbh.getOperation();
                 dbh.insertGame(target, 0, 0);
+                arithmetics = dbh.getTestOperation();
 
                 for (int i = 0; arithmetics.size() > i; i++) {
                     if (arithmetics.size() - 1 == i) {

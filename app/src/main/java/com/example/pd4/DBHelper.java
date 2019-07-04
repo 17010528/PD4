@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "PD4.db";
-    private static final int DATABASE_VER = 29;
+    private static final int DATABASE_VER = 40;
     private static final String TABLE_GAME = "PD4";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_OPERATION = "operation";
@@ -32,6 +32,29 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_SCORE + " INTEGER)";
         db.execSQL(createTableSql);
         Log.i("info" ,"created tables");
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_OPERATION, "+");
+        values.put(COLUMN_SCORE, "1");
+        values.put(COLUMN_DURATION, "10");
+        db.insert(TABLE_GAME, null, values);
+
+        values.put(COLUMN_OPERATION, "-");
+        values.put(COLUMN_SCORE, "1");
+        values.put(COLUMN_DURATION, "10");
+        db.insert(TABLE_GAME, null, values);
+
+        values.put(COLUMN_OPERATION, "÷");
+        values.put(COLUMN_SCORE, "1");
+        values.put(COLUMN_DURATION, "10");
+        db.insert(TABLE_GAME, null, values);
+
+        values.put(COLUMN_OPERATION, "×");
+        values.put(COLUMN_SCORE, "1");
+        values.put(COLUMN_DURATION, "10");
+        db.insert(TABLE_GAME, null, values);
+
+
 
     }
 
@@ -144,6 +167,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return arithmetics;
     }
 
+    public ArrayList<arithmetic> getTestOperation(){
+        ArrayList<arithmetic> arithmetics = new ArrayList<arithmetic>();
+        String selectQuery = "SELECT " + COLUMN_ID + ", "
+                +COLUMN_OPERATION + ", "
+                +COLUMN_DURATION +", "
+                +COLUMN_SCORE
+                +" FROM " + TABLE_GAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String operation= cursor.getString(1);
+                int duration = cursor.getInt(2);
+                int score = cursor.getInt(3);
+                arithmetic obj = new arithmetic(id,operation , duration , score);
+                arithmetics.add(obj);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return arithmetics;
+    }
 
 
 

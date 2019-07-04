@@ -18,21 +18,21 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<arithmetic> arithmetics;
     ArrayList<results> results;
 
-    int highestAdd = 0;
+    int highestAdd = 1;
     int addId = 0;
-    int shortestDuration = 60;
+    int shortestDuration = 11;
 
-    int highestMinus = 0;
+    int highestMinus = 1;
     int minusId = 0;
-    int minusDuration = 0;
+    int minusDuration = 11;
 
-    int highestDivide = 0;
+    int highestDivide = 1;
     int divideId = 0;
-    int divideDuration = 0;
+    int divideDuration = 11;
 
-    int highestMultiply = 0;
+    int highestMultiply = 1;
     int multiplyId = 0;
-    int multiplyDuration = 0;
+    int multiplyDuration = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,24 +62,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else if (operations.equals("-")) {
 
-                if (duration < shortestDuration) {
-                    highestAdd = score;
-                    addId = id;
-                    shortestDuration = duration;
+                if (duration < minusDuration) {
+                    highestMinus = score;
+                    minusId = id;
+                    minusDuration = duration;
                 }
             } else if (operations.equals("÷")) {
 
-                if (duration < shortestDuration) {
-                    highestAdd = score;
-                    addId = id;
-                    shortestDuration = duration;
+                if (duration < divideDuration) {
+                    highestDivide = score;
+                    divideId = id;
+                    divideDuration = duration;
                 }
-            } else if (operations.equals("÷")){
+            } else if (operations.equals("×")){
 
-                if (duration < shortestDuration) {
-                    highestAdd = score;
-                    addId = id;
-                    shortestDuration = duration;
+                if (duration < multiplyDuration) {
+                    highestMultiply = score;
+                    multiplyId = id;
+                    multiplyDuration = duration;
                 }
 
 
